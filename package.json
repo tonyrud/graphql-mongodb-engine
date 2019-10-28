@@ -1,0 +1,32 @@
+{
+  "name": "graphql-engine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "registry:check": "apollo service:check",
+    "registry:push": "apollo service:push"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo": "^2.13.0",
+    "apollo-server": "^2.5.0",
+    "apollo-server-koa": "^2.5.0",
+    "dotenv": "^8.0.0",
+    "graphql": "^14.3.0",
+    "graphql-iso-date": "^3.6.1",
+    "graphql-subscriptions": "^1.1.0",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.7.7",
+    "subscriptions-transport-ws": "^0.9.16"
+  },
+  "devDependencies": {
+    "graphql-tools": "^4.0.4",
+    "nodemon": "^1.19.0"
+  }
+}
