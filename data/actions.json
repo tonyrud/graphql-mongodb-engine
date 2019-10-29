@@ -1,0 +1,12 @@
+[
+  {
+    "_id": "68c039018060197ca0b52d4b",
+    "task": "Engine.Tasks.Time.Format",
+    "mappings": ["78c039018060197ca0b52d4c"]
+  },
+  {
+    "_id": "68c039018060197ca0b52d4d",
+    "task": "Engine.Tasks.String.Replace",
+    "mappings": ["78c039018060197ca0b52d4d"]
+  }
+]

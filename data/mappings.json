@@ -1,0 +1,17 @@
+[
+  {
+    "_id": "78c039018060197ca0b52d4c",
+    "output": {
+      "data": "$ctx.b5e1072a-05c7-49b1-b654-6ab2fd640004.ok",
+      "format": "{RFC1123}"
+    }
+  },
+  {
+    "_id": "78c039018060197ca0b52d4d",
+    "output": {
+      "data": "$ctx.9bfe8dc8-fee5-493d-b37b-cc23e0c8d286.ok",
+      "find": "+0000",
+      "replace": "GMT"
+    }
+  }
+]

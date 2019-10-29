@@ -1,0 +1,40 @@
+[
+  {
+    "_id": "58c039018060197ca0b52d4c",
+    "description": "Retrieve discharged patients from Kipu and sync them with Salesforce.",
+    "entries": ["68c039018060197ca0b52d4b"],
+    "initial": "58c03a428060197ca0b52d10",
+    "meta": {},
+    "steps": ["58c03a428060197ca0b52d10", "58c03a428060197ca0b52d11"],
+    "title": "Transfer from Kipu to Salesforce",
+    "type": "compound"
+  },
+  {
+    "_id": "58c03a428060197ca0b52d10",
+    "entries": ["68c039018060197ca0b52d4b"],
+    "intial": "",
+    "meta": {},
+    "steps": ["58c03a428060197ca0b52d12"],
+    "title": "Step 1",
+    "type": "atomic"
+  },
+  {
+    "_id": "58c03a428060197ca0b52d11",
+    "title": "Step 2",
+    "meta": {
+      "transformations": "[{output: \"{}\", task: \"String.Concat\", title: \"test\"}]"
+    },
+    "type": "atomic",
+    "intial": "",
+    "steps": []
+  },
+  {
+    "_id": "58c03a428060197ca0b52d12",
+    "title": "Nested Step",
+    "meta": {
+      "transformations": "[{output: \"{}\", task: \"String.Concat\", title: \"test\"}]"
+    },
+    "type": "atomic",
+    "intial": ""
+  }
+]

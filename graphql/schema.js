@@ -1,23 +1,33 @@
-const { gql } = require('apollo-server');
+const { gql } = require('apollo-server')
 
 const typeDefs = gql`
+  # enum WorkfowType {
+  #     ENGINE
+  # }
 
-    # enum WorkfowType {
-    #     ENGINE
-    # }
+  type Mapping {
+    output: String
+  }
 
-    type Workflow {
-        id: ID!
-        gender: String
-        birthDate: String
-    }
+  type Action {
+    task: String
+    mappings: [Mapping]
+  }
 
-    type Query {
+  type Workflow {
+    id: ID!
+    description: String
+    initial: Workflow
+    entries: [Action]
+    steps: [Workflow]
+    title: String
+    type: String
+  }
 
-        workflow(id: String): Workflow!
+  type Query {
+    workflows: [Workflow]!
+    workflow(id: ID!): Workflow!
+  }
+`
 
-    }
-
-`;
-
-module.exports = typeDefs;
+module.exports = typeDefs

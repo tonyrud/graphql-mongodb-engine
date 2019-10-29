@@ -3,11 +3,10 @@ version: '3'
 services:
   api:
     build: .
-    # command: nodemon --debug server.js
     ports:
-      - '4001:4001'
+      - '3004:3004'
     environment:
-      - PORT=4001
+      - PORT=3004
     volumes:
       - .:/app
       - /app/node_modules
@@ -15,8 +14,6 @@ services:
       - mongodb
     depends_on:
       - mongodb
-    # networks:
-    #   - back-tier
 
   mongodb:
     image: mongo:latest
@@ -30,4 +27,4 @@ services:
       - ./data/db:/data/db
     ports:
       - 27017:27017
-    command: mongod --smallfiles --logpath=/dev/null # --quiet
+    command: mongod # --quiet

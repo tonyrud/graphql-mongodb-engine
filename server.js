@@ -2,7 +2,7 @@ const koa = require('koa')
 
 const { ApolloServer } = require('apollo-server-koa')
 const playground = require('./graphql/playground')
-const startMongo = require('./data/connection')
+const startMongo = require('./connections/connection')
 const typeDefs = require('./graphql/schema')
 const resolvers = require('./graphql/resolvers')
 const cors = { credentials: true }

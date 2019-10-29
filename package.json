@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "nodemon server.js",
     "registry:check": "apollo service:check",
-    "registry:push": "apollo service:push"
+    "registry:push": "apollo service:push",
+    "db:seed": "npm run db:delete && node ./data/seed.js",
+    "db:delete": "node ./data/seed.js --delete"
   },
   "keywords": [],
   "author": "",
