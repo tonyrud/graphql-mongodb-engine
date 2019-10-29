@@ -13,10 +13,7 @@ const WorkflowSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  initial: {
-    type: Schema.Types.ObjectId,
-    ref: 'workflow',
-  },
+  initial: String,
   entries: [
     {
       type: Schema.Types.ObjectId,

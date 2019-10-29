@@ -3,6 +3,7 @@ version: '3'
 services:
   api:
     build: .
+    container_name: 'api'
     ports:
       - '3004:3004'
     environment:
@@ -27,4 +28,4 @@ services:
       - ./data/db:/data/db
     ports:
       - 27017:27017
-    command: mongod # --quiet
+    command: mongod --quiet

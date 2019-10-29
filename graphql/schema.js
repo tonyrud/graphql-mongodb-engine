@@ -1,9 +1,13 @@
 const { gql } = require('apollo-server')
 
 const typeDefs = gql`
-  # enum WorkfowType {
-  #     ENGINE
-  # }
+  scalar JSON
+
+  enum DataShape {
+    ENGINE
+  }
+
+  union WorkflowType = WorkflowEngine | WorkflowUI
 
   type Mapping {
     output: String
@@ -14,19 +18,25 @@ const typeDefs = gql`
     mappings: [Mapping]
   }
 
-  type Workflow {
+  type WorkflowUI {
     id: ID!
     description: String
-    initial: Workflow
-    entries: [Action]
-    steps: [Workflow]
+    steps: [WorkflowUI]
     title: String
+    transformations: String
+  }
+
+  type WorkflowEngine {
+    id: ID!
+    initial: String
+    entries: [Action]
+    states: [WorkflowEngine]
     type: String
   }
 
   type Query {
-    workflows: [Workflow]!
-    workflow(id: ID!): Workflow!
+    workflows: [WorkflowUI]
+    workflow(id: ID!, dataFor: DataShape): WorkflowType
   }
 `
 
