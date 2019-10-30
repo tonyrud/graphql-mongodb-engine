@@ -48,10 +48,4 @@ const populate = function(next) {
 
 WorkflowSchema.pre('findOne', populate).pre('find', populate)
 
-// RecipeSchema.statics.findIngredients = function(id) {
-//   return this.findById(id)
-//     .populate('ingredients')
-//     .then(recipe => recipe.ingredients)
-// }
-
 module.exports = model('workflow', WorkflowSchema)

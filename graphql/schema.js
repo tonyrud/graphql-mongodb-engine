@@ -42,7 +42,6 @@ const typeDefs = gql`
   }
 
   type Query {
-    workflows: [WorkflowUI]
     workflow(id: ID!, parseFor: DataShape): WorkflowType
   }
 `

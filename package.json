@@ -7,7 +7,8 @@
     "dev": "nodemon server.js",
     "registry:check": "apollo service:check",
     "registry:push": "apollo service:push",
-    "db:seed": "npm run db:delete && node ./data/seed.js",
+    "db:seed": "docker exec -it api npm run seed",
+    "seed": "npm run db:delete && node ./data/seed.js",
     "db:delete": "node ./data/seed.js --delete"
   },
   "keywords": [],
