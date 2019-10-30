@@ -5,16 +5,15 @@
     "entries": ["68c039018060197ca0b52d4b"],
     "initial": "58c03a428060197ca0b52d10",
     "meta": {},
-    "steps": ["58c03a428060197ca0b52d10", "58c03a428060197ca0b52d11"],
+    "states": ["58c03a428060197ca0b52d10", "58c03a428060197ca0b52d11"],
     "title": "Transfer from Kipu to Salesforce",
     "type": "compound"
   },
   {
     "_id": "58c03a428060197ca0b52d10",
-    "entries": ["68c039018060197ca0b52d4b"],
-    "intial": "",
+    "entries": ["68c039018060197ca0b52d4d"],
     "meta": {},
-    "steps": ["58c03a428060197ca0b52d12"],
+    "states": ["58c03a428060197ca0b52d12"],
     "title": "Step 1",
     "type": "atomic"
   },
@@ -22,19 +21,16 @@
     "_id": "58c03a428060197ca0b52d11",
     "title": "Step 2",
     "meta": {
-      "transformations": "[{output: \"{}\", task: \"String.Concat\", title: \"test\"}]"
+      "transformations": [
+        { "output": "{}", "task": "String.Concat", "title": "test" }
+      ]
     },
-    "type": "atomic",
-    "intial": "",
-    "steps": []
+    "type": "atomic"
   },
   {
     "_id": "58c03a428060197ca0b52d12",
     "title": "Nested Step",
-    "meta": {
-      "transformations": "[{output: \"{}\", task: \"String.Concat\", title: \"test\"}]"
-    },
-    "type": "atomic",
-    "intial": ""
+    "meta": {},
+    "type": "atomic"
   }
 ]

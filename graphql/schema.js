@@ -10,20 +10,27 @@ const typeDefs = gql`
   union WorkflowType = WorkflowEngine | WorkflowUI
 
   type Mapping {
-    output: String
+    id: ID!
+    output: JSON
   }
 
   type Action {
+    id: ID!
     task: String
     mappings: [Mapping]
+  }
+
+  type WorkflowStep {
+    id: ID!
+    title: String
+    transformations: JSON
   }
 
   type WorkflowUI {
     id: ID!
     description: String
-    steps: [WorkflowUI]
-    title: String
-    transformations: String
+    steps: [WorkflowStep]
+    title: String!
   }
 
   type WorkflowEngine {
@@ -36,7 +43,7 @@ const typeDefs = gql`
 
   type Query {
     workflows: [WorkflowUI]
-    workflow(id: ID!, dataFor: DataShape): WorkflowType
+    workflow(id: ID!, parseFor: DataShape): WorkflowType
   }
 `
 

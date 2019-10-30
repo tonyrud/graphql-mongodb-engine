@@ -6,8 +6,12 @@ const Workflow = mongoose.model('workflow')
 const populates = wf =>
   wf
     .populate({
-      path: 'steps',
-      populate: { path: 'steps' },
+      path: 'states',
+      populate: { path: 'states' },
+    })
+    .populate({
+      path: 'states',
+      populate: { path: 'entries' },
     })
     .populate({
       path: 'entries',
@@ -16,21 +20,28 @@ const populates = wf =>
 
 const resolvers = {
   JSON: GraphQLJSON,
-  WorkflowUI: {
+  Mapping: {
+    output: ({ output }) => {
+      if (output) {
+        return JSON.parse(output)
+      }
+      return ''
+    },
+  },
+  WorkflowStep: {
     transformations: ({ meta }) => {
-      return meta.transformations
+      if (meta && meta.transformations) {
+        return JSON.parse(meta.transformations)
+      }
+      return []
     },
   },
   Query: {
-    workflows: async () => {
-      const wf = Workflow.find({})
-
-      return populates(wf)
+    workflows: () => {
+      Workflow.find({})
     },
-    workflow: async (_, { id, dataFor }) => {
-      //   console.log('stuff', stuff)
-      //   const wf = Workflow.findById(args.id)
-      return getWorkflowEngine(id, dataFor)
+    workflow: (_, { id, parseFor }) => {
+      return getWorkflowEngine(id, parseFor)
     },
   },
   WorkflowType: {
@@ -45,34 +56,25 @@ const resolvers = {
   },
 }
 
-async function getWorkflowEngine(id, dataFor) {
-  const wf = Workflow.findById(id)
-  const {
-    _id,
-    initial,
-    entries,
-    steps,
-    type,
-    title,
-    description,
-    meta,
-  } = await populates(wf)
-
-  if (dataFor === 'ENGINE') {
-    return {
-      _id,
-      initial,
-      entries,
-      states: steps,
-      type,
-    }
+async function getWorkflowEngine(id, parseFor) {
+  const wf = await Workflow.findById(id)
+  if (parseFor === 'ENGINE') {
+    return wf
   } else {
-    return {
+    const {
       _id,
       title,
       description,
-      steps,
-      transformations: meta.transformations,
+      states,
+      meta: { transformations },
+    } = wf
+
+    return {
+      id: _id,
+      title,
+      description,
+      steps: states,
+      transformations,
     }
   }
 }

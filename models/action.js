@@ -1,8 +1,7 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const { Schema, model } = require('mongoose')
 
 const ActionSchema = new Schema({
-  task: { type: String },
+  task: String,
   mappings: [
     {
       type: Schema.Types.ObjectId,
@@ -11,4 +10,4 @@ const ActionSchema = new Schema({
   ],
 })
 
-module.exports = mongoose.model('action', ActionSchema)
+module.exports = model('action', ActionSchema)

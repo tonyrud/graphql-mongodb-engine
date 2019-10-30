@@ -1,14 +1,16 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const { Schema, model } = require('mongoose')
 
 const WorkflowSchema = new Schema({
-  title: { type: String },
-  description: { type: String },
+  title: {
+    type: String,
+    required: [true, 'Title is required'],
+  },
+  description: String,
   meta: {
     transformations: String,
     exposures: String,
   },
-  type: { type: String },
+  type: String,
   created: {
     type: Date,
     default: Date.now,
@@ -20,7 +22,7 @@ const WorkflowSchema = new Schema({
       ref: 'action',
     },
   ],
-  steps: [
+  states: [
     {
       type: Schema.Types.ObjectId,
       ref: 'workflow',
@@ -28,10 +30,28 @@ const WorkflowSchema = new Schema({
   ],
 })
 
+const populate = function(next) {
+  this.populate({
+    path: 'states',
+    populate: { path: 'states' },
+  })
+    .populate({
+      path: 'states',
+      populate: { path: 'entries' },
+    })
+    .populate({
+      path: 'entries',
+      populate: { path: 'mappings' },
+    })
+  next()
+}
+
+WorkflowSchema.pre('findOne', populate).pre('find', populate)
+
 // RecipeSchema.statics.findIngredients = function(id) {
 //   return this.findById(id)
 //     .populate('ingredients')
 //     .then(recipe => recipe.ingredients)
 // }
 
-module.exports = mongoose.model('workflow', WorkflowSchema)
+module.exports = model('workflow', WorkflowSchema)
