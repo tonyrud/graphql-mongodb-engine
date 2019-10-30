@@ -1,20 +1,20 @@
 const { Schema, model } = require('mongoose')
 
 const WorkflowSchema = new Schema({
-  title: {
-    type: String,
-    required: [true, 'Title is required'],
-  },
-  description: String,
   meta: {
+    title: {
+      type: String,
+      required: [true, 'Title is required'],
+    },
+    description: String,
     transformations: String,
     exposures: String,
+    created: {
+      type: Date,
+      default: Date.now,
+    },
   },
   type: String,
-  created: {
-    type: Date,
-    default: Date.now,
-  },
   initial: String,
   entries: [
     {

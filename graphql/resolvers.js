@@ -1,22 +1,7 @@
-const mongoose = require('mongoose')
 require('./../models/')
+const mongoose = require('mongoose')
 const GraphQLJSON = require('graphql-type-json')
 const Workflow = mongoose.model('workflow')
-
-const populates = wf =>
-  wf
-    .populate({
-      path: 'states',
-      populate: { path: 'states' },
-    })
-    .populate({
-      path: 'states',
-      populate: { path: 'entries' },
-    })
-    .populate({
-      path: 'entries',
-      populate: { path: 'mappings' },
-    })
 
 const resolvers = {
   JSON: GraphQLJSON,
@@ -30,18 +15,21 @@ const resolvers = {
   },
   WorkflowStep: {
     transformations: ({ meta }) => {
-      if (meta && meta.transformations) {
-        return JSON.parse(meta.transformations)
+      const { transformations } = meta
+
+      if (transformations) {
+        return JSON.parse(transformations)
       }
       return []
     },
+    title: ({ meta: { title } }) => title,
   },
   Query: {
     workflows: () => {
       Workflow.find({})
     },
     workflow: (_, { id, parseFor }) => {
-      return getWorkflowEngine(id, parseFor)
+      return getWorkflowFor(id, parseFor)
     },
   },
   WorkflowType: {
@@ -56,19 +44,18 @@ const resolvers = {
   },
 }
 
-async function getWorkflowEngine(id, parseFor) {
+async function getWorkflowFor(id, parseFor) {
   const wf = await Workflow.findById(id)
   if (parseFor === 'ENGINE') {
     return wf
   } else {
     const {
       _id,
-      title,
-      description,
       states,
-      meta: { transformations },
+      meta: { transformations, title, description },
     } = wf
 
+    // spread operator will not work here, for some reason :shrug
     return {
       id: _id,
       title,

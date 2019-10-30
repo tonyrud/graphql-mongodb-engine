@@ -16,7 +16,7 @@ const playground = {
     'schema.disableComments': false,
     'tracing.hideTracingResponse': true,
   },
-  workspaceName: 'FHIR with GraphQL',
+  workspaceName: 'MongoDB Engine with GraphQL',
 }
 
 module.exports = playground
